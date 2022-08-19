@@ -304,6 +304,9 @@ async function create_function_bundle(builder, entry, dir, runtime) {
 	const resolution_failures = new Map();
 
 	traced.warnings.forEach((error) => {
+		// pending https://github.com/sveltejs/kit/issues/5577
+		if (error.message.startsWith('Failed to parse')) return;
+
 		// pending https://github.com/vercel/nft/issues/284
 		if (error.message.startsWith('Failed to resolve dependency node:')) return;
 
